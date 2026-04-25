@@ -49,7 +49,8 @@ const Contact = () => {
           >
             <span className="eyebrow blue">Our Concierge</span>
             <h1>At Your Service</h1>
-            <p>Our luxury travel advisors are dedicated to crafting your perfect itinerary. Contact us for personalized assistance.</p>
+            <p>Our luxury travel advisors are dedicated to crafting your
+              perfect itinerary. Contact us for personalized assistance.</p>
           </motion.div>
         </div>
       </section>
@@ -75,8 +76,10 @@ const Contact = () => {
             </div>
 
             <div className="badges-row-v2">
-               <div className="badge-item-v2"><Shield size={18} color="var(--primary)" /> 24/7 Support</div>
-               <div className="badge-item-v2"><Globe size={18} color="var(--primary)" /> Global Reach</div>
+              <div className="badge-item-v2"><Shield size={18} color="var(--primary)" />
+                24/7 Support</div>
+              <div className="badge-item-v2"><Globe size={18} color="var(--primary)" />
+                Global Reach</div>
             </div>
           </aside>
 
