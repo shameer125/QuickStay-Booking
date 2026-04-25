@@ -23,7 +23,8 @@ const Checkout = () => {
   const guests = parseInt(queryParams.get("guests")) || 2;
 
   useEffect(() => {
-    const fetchRoom = async () => {
+     const fetchRoom = async () => {
+       
       try {
         const { data } = await api.get(`/rooms/${id}`);
         setRoom(data);
@@ -94,7 +95,8 @@ const Checkout = () => {
             <div className="success-footer">
                <button onClick={() => navigate("/dashboard")} className="btn-primary-blue">View My Bookings</button>
                <button onClick={() => navigate("/")} className="btn-outline">Back to Home</button>
-            </div>
+                </div>
+                
           </motion.div>
         </div>
       </div>
