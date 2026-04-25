@@ -10,16 +10,19 @@ const About = () => {
       title: "Excellence",
       desc: "An obsessive attention to detail that defines every aspect of our curated selection."
     },
+
     {
       icon: <ShieldCheck color="var(--primary)" size={32} />,
       title: "Integrity",
       desc: "Transparent relationships with partners and absolute privacy for our discerning guests."
     },
+
     {
       icon: <Users color="var(--primary)" size={32} />,
       title: "Connection",
       desc: "Bridging the gap between soulful travelers and the world's most evocative spaces."
     }
+    
   ];
 
   return (
