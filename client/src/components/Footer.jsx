@@ -15,7 +15,8 @@ const Footer = () => {
               <span>QuickStay</span>
             </Link>
             <p>
-              Defining the frontier of luxury travel since 2024. We curate the world's most extraordinary properties for the discerning traveler.
+              Defining the frontier of luxury travel since 2024. We curate the
+              world's most extraordinary properties for the discerning traveler.
             </p>
             <div className="social-links">
               <a href="#" aria-label="Instagram"><FaInstagram size={20} /></a>
@@ -47,7 +48,8 @@ const Footer = () => {
 
           <div className="footer-newsletter">
              <h4>THE DISPATCH</h4>
-             <p>Subscribe for early access to off-market properties and curated seasonal collections.</p>
+            <p>Subscribe for early access to off-market properties and curated
+              seasonal collections.</p>
              <div className="newsletter-box">
                 <input type="email" placeholder="Email Address" />
                 <button aria-label="Subscribe">
