@@ -1,0 +1,94 @@
+.about-page-exact {
+  background-color: #fff;
+}
+
+.about-hero-clean-v2 {
+  padding: 12rem 0 6rem;
+  background-color: var(--neutral-900);
+  color: white;
+  margin-top: -84px;
+}
+
+.about-hero-text {
+  max-width: 800px;
+}
+
+.about-hero-text h1 {
+  font-size: 4rem;
+  margin-bottom: 1.5rem;
+}
+
+.about-hero-text p {
+  font-size: 1.25rem;
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+/* Mission Section */
+.mission-sec-clean { padding: 8rem 0; }
+
+.flex-layout-v2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: center;
+}
+
+.mission-visual-box img {
+  width: 100%;
+  height: 600px;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+}
+
+.mission-content-v2 h2 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.mission-content-v2 p {
+  color: var(--neutral-500);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+}
+
+/* Values Grid */
+.values-sec-clean { padding: 8rem 0; background: var(--neutral-50); }
+
+.values-grid-v2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem;
+}
+
+.val-card-v2 {
+  background: white;
+  padding: 3rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--neutral-100);
+  text-align: center;
+}
+
+.v-icon-box {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.val-card-v2 h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.val-card-v2 p {
+  font-size: 0.95rem;
+  color: var(--neutral-500);
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .flex-layout-v2, .values-grid-v2 { grid-template-columns: 1fr; }
+  .about-hero-text h1 { font-size: 3rem; }
+}

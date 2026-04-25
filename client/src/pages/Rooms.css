@@ -1,0 +1,356 @@
+.rooms-exact-page {
+  padding: 8rem 0 5rem;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.rooms-head-exact {
+  margin-bottom: 3.5rem;
+  padding-top: 2rem;
+}
+
+.rooms-head-exact h1 {
+  font-size: 2.25rem;
+  font-weight: 800;
+  margin-bottom: 0.75rem;
+}
+
+.rooms-head-exact p {
+  color: var(--neutral-400);
+  max-width: 600px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.rooms-layout-exact {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* ── Horizontal Cards ── */
+.rooms-list-exact {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.room-card-h-exact {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--neutral-100);
+}
+
+.room-card-h-exact:first-child {
+  padding-top: 0;
+}
+
+.card-image-h {
+  height: 200px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  display: block;
+}
+
+.card-image-h img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card-image-h:hover img {
+  transform: scale(1.05);
+}
+
+.card-info-h {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.1rem;
+}
+
+.loc-sup {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.3rem;
+}
+
+.title-row-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.4rem;
+}
+
+.title-row-h h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+}
+
+.title-row-h a {
+  color: inherit;
+}
+
+.rating-h {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--neutral-400);
+  flex-shrink: 0;
+}
+
+.rating-h span {
+  margin-left: 0.4rem;
+}
+
+.card-loc-h {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--neutral-400);
+  margin-bottom: 1rem;
+}
+
+.amenities-h {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.amenities-h span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--neutral-400);
+  padding: 0.35rem 0.7rem;
+  background: var(--neutral-50);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--neutral-100);
+}
+
+.card-footer-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price-h {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.price-h .unit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--neutral-400);
+}
+
+.view-details-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--neutral-500);
+  border: 1px solid var(--neutral-200);
+  padding: 0.5rem 1.25rem;
+  border-radius: 4px;
+  transition: var(--transition);
+}
+
+.view-details-link:hover {
+  border-color: var(--neutral-900);
+  color: var(--neutral-900);
+}
+
+.show-more-row {
+  padding: 3rem 0;
+  text-align: center;
+}
+
+.show-more-exact {
+  background: var(--primary);
+  color: white;
+  padding: 0.85rem 3rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.show-more-exact:hover {
+  background: var(--primary-dark);
+}
+
+/* ── Sidebar Filters ── */
+.filters-sidebar-exact {
+  background: #fff;
+  border: 1px solid var(--neutral-100);
+  border-radius: var(--radius-sm);
+  padding: 2rem;
+  height: fit-content;
+  position: sticky;
+  top: 110px;
+}
+
+.sidebar-header-exact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--neutral-100);
+}
+
+.sidebar-header-exact h3 {
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  font-weight: 800;
+}
+
+.sidebar-header-exact button {
+  background: none;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--neutral-400);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.filter-sec {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--neutral-100);
+}
+
+.filter-sec:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.filter-sec h4 {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.options-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.check-box-exact {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  cursor: pointer;
+}
+
+.check-box-exact input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.check-box-exact span {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--neutral-500);
+}
+
+/* ── Responsive ── */
+.mobile-filter-trigger {
+  display: none;
+  background: white;
+  border: 1px solid var(--neutral-200);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--neutral-700);
+  margin-top: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (max-width: 1100px) {
+  .rooms-layout-exact { grid-template-columns: 1fr; }
+  .filters-sidebar-exact { display: none; }
+  .mobile-filter-trigger { display: inline-flex; align-items: center; gap: 0.5rem; }
+}
+
+@media (max-width: 768px) {
+  .room-card-h-exact { grid-template-columns: 1fr; gap: 1rem; }
+  .card-image-h { height: 250px; }
+  .rooms-exact-page { padding: 7rem 0 3rem; }
+  .rooms-head-exact { margin-bottom: 2.5rem; }
+}
+
+/* Mobile Filter Drawer */
+.filter-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(4px);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.filter-drawer {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  animation: slideLeft 0.3s ease-out;
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+.drawer-header {
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid var(--neutral-100);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.drawer-header h3 { font-size: 1.1rem; }
+.close-drawer { background: none; font-size: 1.5rem; color: var(--neutral-400); }
+
+.drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+.drawer-footer {
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--neutral-100);
+}
+
+.apply-btn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  padding: 1rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+}

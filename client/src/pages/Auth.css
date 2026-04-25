@@ -1,0 +1,137 @@
+.auth-page-exact {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--neutral-50);
+  padding: 2rem;
+  margin-top: -84px;
+}
+
+.auth-card-clean {
+  width: 100%;
+  max-width: 480px;
+  background: white;
+  padding: 4rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  border: 1px solid var(--neutral-100);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.auth-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--neutral-900);
+}
+
+.auth-header p {
+  color: var(--neutral-500);
+  font-size: 0.95rem;
+}
+
+.auth-form-clean {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-input-box label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--neutral-700);
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--neutral-200);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+  color: var(--neutral-400);
+}
+
+.input-with-icon input {
+  border: none;
+  width: 100%;
+  font-size: 1rem;
+  outline: none;
+  background: none;
+}
+
+.input-with-icon:focus-within {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+  color: var(--primary);
+}
+
+.auth-error-msg {
+  background: #fef2f2;
+  color: #dc2626;
+  padding: 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.auth-submit-btn-clean {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: var(--transition);
+}
+
+.auth-submit-btn-clean:hover {
+  background: var(--primary-dark);
+}
+
+.auth-submit-btn-clean:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.auth-footer-clean {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-footer-clean a {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.admin-demo {
+  margin-top: 2rem;
+  padding: 1rem;
+  background: var(--neutral-50);
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  color: var(--neutral-400);
+}
+
+@media (max-width: 480px) {
+  .auth-card-clean {
+    padding: 2.5rem 2rem;
+  }
+}

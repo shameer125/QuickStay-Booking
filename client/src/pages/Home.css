@@ -1,0 +1,453 @@
+.home-exact {
+  overflow-x: hidden;
+}
+
+/* ── Hero Section ── */
+.hero-exact-wrap {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 84px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+              url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1920&q=80');
+  background-size: cover;
+  background-position: center;
+  z-index: -1;
+}
+
+.hero-content-exact {
+  padding: 6rem 0 8rem;
+}
+
+.hero-content-exact h1 {
+  font-family: var(--font-title);
+  font-size: 3.75rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.15;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.7;
+  margin-bottom: 3.5rem;
+  max-width: 580px;
+}
+
+@media (max-width: 768px) {
+  .hero-content-exact {
+    padding: 4rem 0 6rem;
+  }
+  .hero-sub {
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+  }
+}
+
+.eyebrow.white {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Search Bar */
+.search-bar-exact {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1.25rem 2rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+  width: fit-content;
+}
+
+.search-input {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 140px;
+}
+
+.search-input.sm {
+  min-width: 80px;
+}
+
+.search-input label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.search-input input {
+  background: none;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  color: white;
+  font-weight: 500;
+  font-size: 0.9rem;
+  outline: none;
+  padding-bottom: 0.4rem;
+}
+
+.search-input input::placeholder {
+  color: rgba(255,255,255,0.5);
+}
+
+.search-input input[type="date"] {
+  color-scheme: dark;
+}
+
+.search-btn-exact {
+  background: var(--neutral-900);
+  color: white;
+  padding: 0.85rem 2rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.search-btn-exact:hover {
+  background: var(--primary);
+}
+
+/* ── Featured Hotels ── */
+.featured-exact {
+  padding: 7rem 0;
+}
+
+.hotel-grid-exact {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.hotel-card-exact {
+  background: white;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--neutral-100);
+  transition: var(--transition);
+}
+
+.hotel-card-exact:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-4px);
+}
+
+.card-link-wrap {
+  display: block;
+  color: inherit;
+}
+
+.card-top {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.card-top img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.hotel-card-exact:hover .card-top img {
+  transform: scale(1.05);
+}
+
+.best-seller {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: white;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--neutral-800);
+}
+
+.card-body {
+  padding: 1.25rem 1.5rem 1.5rem;
+}
+
+.body-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.4rem;
+}
+
+.body-top h3 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--neutral-700);
+  flex-shrink: 0;
+}
+
+.loc {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--neutral-400);
+  margin-bottom: 1.25rem;
+}
+
+.body-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--neutral-100);
+}
+
+.price {
+  font-size: 0.8rem;
+  color: var(--neutral-400);
+}
+
+.price strong {
+  font-size: 1.05rem;
+  color: var(--neutral-900);
+  font-weight: 800;
+}
+
+.view-btn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--neutral-400);
+  border: 1px solid var(--neutral-200);
+  padding: 0.4rem 0.85rem;
+  border-radius: 4px;
+}
+
+.view-all-row {
+  margin-top: 3.5rem;
+  text-align: center;
+}
+
+.view-all-ghost {
+  display: inline-block;
+  border: 1px solid var(--neutral-200);
+  padding: 0.85rem 3rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--neutral-500);
+  transition: var(--transition);
+}
+
+.view-all-ghost:hover {
+  border-color: var(--neutral-900);
+  color: var(--neutral-900);
+}
+
+/* ── Exclusive Offers ── */
+.offers-exact {
+  padding: 7rem 0;
+  background: var(--neutral-50);
+}
+
+.view-link {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  color: var(--neutral-900);
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.offers-grid-exact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.offer-card-exact {
+  position: relative;
+  height: 420px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.offer-card-exact img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.offer-card-exact:hover img {
+  transform: scale(1.08);
+}
+
+.offer-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem 2rem 2.5rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.85));
+  color: white;
+}
+
+.offer-badge {
+  background: var(--primary);
+  padding: 0.3rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.offer-content h3 {
+  font-size: 1.35rem;
+  margin-bottom: 0.4rem;
+}
+
+.offer-content p {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-bottom: 1.25rem;
+  line-height: 1.5;
+}
+
+.offer-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: white;
+}
+
+/* ── Testimonials ── */
+.testimonials-exact {
+  padding: 7rem 0;
+}
+
+.testimonials-grid-exact {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.testi-card {
+  padding: 2.5rem;
+  background: white;
+  border: 1px solid var(--neutral-100);
+  border-radius: var(--radius-lg);
+  transition: var(--transition);
+}
+
+.testi-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.testi-user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.testi-user img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.testi-user h4 {
+  font-size: 0.95rem;
+  margin-bottom: 0.15rem;
+}
+
+.testi-user p {
+  font-size: 0.78rem;
+  color: var(--neutral-400);
+}
+
+.testi-stars {
+  display: flex;
+  gap: 0.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.testi-text {
+  line-height: 1.7;
+  color: var(--neutral-500);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1200px) {
+  .hotel-grid-exact { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 1024px) {
+  .offers-grid-exact, .testimonials-grid-exact { grid-template-columns: repeat(2, 1fr); }
+  .search-bar-exact { flex-wrap: wrap; }
+}
+
+@media (max-width: 768px) {
+  .hotel-grid-exact, .offers-grid-exact, .testimonials-grid-exact { grid-template-columns: 1fr; }
+  .hero-content-exact h1 { font-size: 2.5rem !important; }
+  .search-bar-exact { 
+    flex-direction: column; 
+    width: 100%; 
+    align-items: stretch; 
+    padding: 1.5rem;
+    gap: 1.25rem;
+  }
+  .search-input {
+    min-width: unset;
+  }
+  .search-btn-exact {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .section-head-exact.flex { flex-direction: column; gap: 1rem; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .hero-content-exact h1 { font-size: 2rem !important; }
+  .hero-exact-wrap { padding-top: 74px; }
+  .featured-exact, .offers-exact, .testimonials-exact { padding: 4rem 0; }
+}
