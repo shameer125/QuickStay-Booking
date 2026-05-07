@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { AuthContext } from "../context/AuthContext";
 import { CreditCard, ShieldCheck, CheckCircle, ArrowLeft, Loader2, MapPin, Calendar, Users } from "lucide-react";
 import api from "../utils/api";
+import RoomImg from "../components/RoomImg";
 import "./Checkout.css";
 
 const Checkout = () => {
@@ -93,7 +94,13 @@ const Checkout = () => {
             </div>
 
             <div className="success-footer">
-               <button onClick={() => navigate("/dashboard")} className="btn-primary-blue">View My Bookings</button>
+               <button
+                 type="button"
+                 onClick={() => navigate(user?.isAdmin ? "/dashboard" : "/my-bookings")}
+                 className="btn-primary-blue"
+               >
+                 {user?.isAdmin ? "Open admin" : "View my bookings"}
+               </button>
                <button onClick={() => navigate("/")} className="btn-outline">Back to Home</button>
                 </div>
                 
@@ -179,7 +186,7 @@ const Checkout = () => {
               <div className="summary-card-clean">
                  <h3>Price Summary</h3>
                  <div className="room-preview-box">
-                    <img src={room?.images?.[0] || "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=100&q=80"} alt="" />
+                    <RoomImg room={room} slot={0} alt="" />
                     <div className="meta">
                        <h4>{room?.title}</h4>
                        <p>{room?.category}</p>

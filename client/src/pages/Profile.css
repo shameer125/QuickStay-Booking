@@ -159,3 +159,15 @@
   .form-grid-clean { grid-template-columns: 1fr; }
   .form-section { margin-bottom: 2rem; }
 }
+
+@media (max-width: 480px) {
+  .profile-header-top h1 {
+    font-size: 1.55rem;
+    line-height: 1.2;
+  }
+
+  .save-profile-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Mail, Lock, ArrowRight, User } from "lucide-react";
+import { Mail, Lock, ArrowRight } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
+import { getApiErrorMessage } from "../utils/api";
 import "./Auth.css";
 
 const Login = () => {
@@ -15,7 +16,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user) {
-      navigate("/dashboard");
+      navigate(user.isAdmin ? "/dashboard" : "/", { replace: true });
     }
   }, [user, navigate]);
 
@@ -26,7 +27,8 @@ const Login = () => {
     try {
       await login(email, password);
     } catch (err) {
-      setError(err.response?.data?.message || "Authentication failed.");
+      setError(getApiErrorMessage(err, "Authentication failed."));
+    } finally {
       setLoading(false);
     }
   };
@@ -83,9 +85,16 @@ const Login = () => {
 
           <footer className="auth-footer-clean">
             <p>Don't have an account? <Link to="/register">Create one</Link></p>
-            <div className="admin-demo">
-               <span>Demo: admin@quickstay.com / admin123</span>
-            </div>
+            {/* <div className="admin-demo">
+              <p>
+                <strong>Admin access:</strong> sign in with{" "}
+                <code>admin@quickstay.com</code> / <code>admin123</code> (or your{" "}
+                <code>ADMIN_EMAIL</code> / <code>ADMIN_PASSWORD</code> from{" "}
+                <code>.env</code>). You will be redirected to the{" "}
+                <strong>admin dashboard</strong>, or open{" "}
+                <Link to="/dashboard">/dashboard</Link> after logging in.
+              </p>
+            </div> */}
           </footer>
         </motion.div>
       </div>

@@ -6,10 +6,17 @@ const seedBookings = async () => {
   try {
     // Get admin user and check if they have bookings
     const adminUser = await User.findOne({ email: "admin@quickstay.com" });
+    const totalRoomCount = await Room.countDocuments();
     const rooms = await Room.find().limit(2);
 
     console.log("Admin user found:", !!adminUser);
-    console.log("Rooms found:", rooms.length);
+    console.log(
+      "Rooms in database:",
+      totalRoomCount,
+      "(booking seed uses first",
+      rooms.length,
+      "for sample data)",
+    );
 
     if (adminUser && rooms.length >= 2) {
       // Check if admin already has bookings

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { Search, User, Menu, X, LogOut } from "lucide-react";
+import { Search, User, Menu, X, LogOut, LayoutDashboard, CalendarDays, Bookmark } from "lucide-react";
 import "./Navbar.css";
 
 const Navbar = () => {
@@ -38,17 +38,43 @@ const Navbar = () => {
            <Link to="/" className={location.pathname === "/" ? "active" : ""}>Home</Link>
            <Link to="/rooms" className={location.pathname === "/rooms" ? "active" : ""}>Stays</Link>
            <Link to="/experience" className={location.pathname === "/experience" ? "active" : ""}>Experiences</Link>
+           <Link to="/groups" className={location.pathname === "/groups" ? "active" : ""}>Groups</Link>
+           <Link to="/help" className={location.pathname === "/help" ? "active" : ""}>Help</Link>
            <Link to="/about" className={location.pathname === "/about" ? "active" : ""}>About</Link>
         </div>
 
         <div className="nav-actions-exact">
-           <button className="search-trigger" onClick={() => navigate('/search')}><Search size={18} /></button>
+           <Link to="/saved" className="nav-saved-trigger" title="Saved stays" aria-label="Saved stays">
+             <Bookmark size={18} />
+           </Link>
+           <button type="button" className="search-trigger" aria-label="Search stays" onClick={() => navigate("/search")}>
+             <Search size={18} />
+           </button>
            {user ? (
              <>
-               <Link to="/dashboard" className="user-pill-exact">
-                  <User size={16} />
-                  <span>{user.name}</span>
-               </Link>
+               {user.isAdmin ? (
+                 <Link to="/dashboard" className="nav-dash-link" title="Admin dashboard">
+                   <LayoutDashboard size={18} />
+                   <span>Admin</span>
+                 </Link>
+               ) : (
+                 <>
+                   <Link to="/my-bookings" className="nav-trips-link" title="Your reservations">
+                     <CalendarDays size={18} />
+                     <span>My trips</span>
+                   </Link>
+                   <Link to="/profile" className="user-pill-exact">
+                     <User size={16} />
+                     <span>{user.name}</span>
+                   </Link>
+                 </>
+               )}
+               {user.isAdmin && (
+                 <Link to="/profile" className="user-pill-exact subtle" title="Account">
+                   <User size={16} />
+                   <span>{user.name}</span>
+                 </Link>
+               )}
                <button className="nav-logout-btn" onClick={() => { logout(); navigate("/"); }} title="Logout">
                   <LogOut size={18} />
                </button>
@@ -68,10 +94,20 @@ const Navbar = () => {
            <Link to="/" onClick={() => setMobileMenuOpen(false)}>Home</Link>
            <Link to="/rooms" onClick={() => setMobileMenuOpen(false)}>Stays</Link>
            <Link to="/experience" onClick={() => setMobileMenuOpen(false)}>Experiences</Link>
+           <Link to="/groups" onClick={() => setMobileMenuOpen(false)}>Groups</Link>
+           <Link to="/help" onClick={() => setMobileMenuOpen(false)}>Help</Link>
            <Link to="/about" onClick={() => setMobileMenuOpen(false)}>About</Link>
+           <Link to="/saved" onClick={() => setMobileMenuOpen(false)}>Saved stays</Link>
            {user ? (
              <>
-               <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>Dashboard ({user.name})</Link>
+               {user.isAdmin ? (
+                 <Link to="/dashboard" onClick={() => setMobileMenuOpen(false)}>Admin dashboard</Link>
+               ) : (
+                 <>
+                   <Link to="/my-bookings" onClick={() => setMobileMenuOpen(false)}>My trips</Link>
+                   <Link to="/profile" onClick={() => setMobileMenuOpen(false)}>Account ({user.name})</Link>
+                 </>
+               )}
                <button className="mobile-logout-btn" onClick={() => { logout(); navigate("/"); setMobileMenuOpen(false); }}>
                   <LogOut size={18} /> Logout
                </button>

@@ -26,16 +26,9 @@ const addBookingItems = async (req, res) => {
 // @route   GET /api/bookings/mybookings
 // @access  Private
 const getMyBookings = async (req, res) => {
-  console.log("getMyBookings called for user:", req.user._id);
-  console.log("User email:", req.user.email);
   const bookings = await Booking.find({ user: req.user._id }).populate(
     "room",
-    "title images",
-  );
-  console.log("Found bookings:", bookings.length);
-  console.log(
-    "Bookings details:",
-    bookings.map((b) => ({ id: b._id, user: b.user, room: b.room?.title })),
+    "title images location price rating",
   );
   res.json(bookings);
 };

@@ -48,6 +48,7 @@
 }
 
 .card-image {
+  position: relative;
   height: 250px;
   border-radius: var(--radius-sm);
   overflow: hidden;
@@ -261,6 +262,34 @@
 @media (max-width: 480px) {
   .card-image { height: 200px; }
   .room-horizontal-card { padding: 1rem; }
+  .search-results-page-clean {
+    padding: 6rem 0 3rem;
+  }
+
+  .results-header-clean h1 {
+    font-size: 1.55rem;
+    line-height: 1.25;
+  }
+
+  .title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .card-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .details-btn {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 /* Mobile Filter Drawer - Reusing logic or styles if needed, but defining for this page */
@@ -331,4 +360,68 @@
   padding: 1rem;
   border-radius: var(--radius-sm);
   font-weight: 700;
+}
+
+.results-meta-line {
+  font-size: 0.92rem;
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.results-error-banner {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+.empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+}
+
+.card-offer-chip {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  background: var(--neutral-900);
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.65rem;
+  border-radius: 4px;
+}
+
+.mobile-filter-trigger {
+  display: none;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+@media (max-width: 960px) {
+  .mobile-filter-trigger {
+    display: inline-flex;
+    margin-top: 1.25rem;
+    padding: 0.65rem 1.25rem;
+    border: 1px solid var(--neutral-200);
+    border-radius: var(--radius-sm);
+    background: white;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--neutral-800);
+  }
+}
+
+.sidebar-header h3 {
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
 }

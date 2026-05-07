@@ -27,11 +27,11 @@
 
 .hero-content-exact h1 {
   font-family: var(--font-title);
-  font-size: 3.75rem;
+  font-size: clamp(2rem, 4vw + 1.25rem, 3.75rem);
   font-weight: 800;
   color: white;
   margin-bottom: 1.5rem;
-  line-height: 1.15;
+  line-height: 1.12;
 }
 
 .hero-sub {
@@ -136,7 +136,7 @@
 
 .hotel-grid-exact {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
 }
 
@@ -427,7 +427,6 @@
 
 @media (max-width: 768px) {
   .hotel-grid-exact, .offers-grid-exact, .testimonials-grid-exact { grid-template-columns: 1fr; }
-  .hero-content-exact h1 { font-size: 2.5rem !important; }
   .search-bar-exact { 
     flex-direction: column; 
     width: 100%; 
@@ -447,7 +446,6 @@
 }
 
 @media (max-width: 480px) {
-  .hero-content-exact h1 { font-size: 2rem !important; }
   .hero-exact-wrap { padding-top: 74px; }
   .featured-exact, .offers-exact, .testimonials-exact { padding: 4rem 0; }
 }

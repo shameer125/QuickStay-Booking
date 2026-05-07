@@ -1,7 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  /* Exactly same color palette from screenshots */
+  --nav-h: 84px;
+  --surface: #ffffff;
+  --surface-muted: #f8fafc;
   --primary: #2563eb;
   --primary-dark: #1d4ed8;
   --accent: #f59e0b;
@@ -35,6 +37,17 @@
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+@media (max-width: 1024px) {
+  :root {
+    --nav-h: 74px;
+  }
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -46,6 +59,12 @@ body {
   background-color: #fff;
   color: var(--neutral-800);
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+video {
+  max-width: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -55,9 +74,9 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-  h1 { font-size: 2.5rem !important; }
-  h2 { font-size: 2rem !important; }
-  h3 { font-size: 1.5rem !important; }
+  h1 { font-size: clamp(1.65rem, 6vw + 0.5rem, 2.75rem) !important; }
+  h2 { font-size: clamp(1.35rem, 4vw + 0.35rem, 2.1rem) !important; }
+  h3 { font-size: clamp(1.1rem, 3vw + 0.25rem, 1.65rem) !important; }
 }
 
 a {
@@ -169,14 +188,14 @@ li { list-style: none; }
 /* Loading State */
 .loading {
   text-align: center;
-  padding: 10rem 0;
+  padding: clamp(5rem, 18vw, 10rem) 1rem;
   font-size: 1.1rem;
   color: var(--neutral-400);
 }
 
 .loading-exact {
   text-align: center;
-  padding: 10rem 0;
+  padding: clamp(5rem, 18vw, 10rem) 1rem;
   font-size: 1.1rem;
   color: var(--neutral-400);
 }
@@ -200,13 +219,20 @@ li { list-style: none; }
 .section-head-exact.flex { display: flex; justify-content: space-between; align-items: flex-end; }
 
 .section-head-exact h2 {
-  font-size: 2.25rem;
+  font-size: clamp(1.45rem, 3vw + 1rem, 2.25rem);
   margin-bottom: 1rem;
 }
 
 .section-head-exact p {
   color: var(--neutral-500);
   line-height: 1.6;
+  max-width: min(100%, 42rem);
+}
+
+@media (max-width: 480px) {
+  .section-head-exact {
+    margin-bottom: 2.5rem;
+  }
 }
 
 /* Custom Scrollbar */
@@ -214,3 +240,31 @@ li { list-style: none; }
 ::-webkit-scrollbar-track { background: var(--neutral-50); }
 ::-webkit-scrollbar-thumb { background: var(--neutral-300); border-radius: 4px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--neutral-400); }
+
+.app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+.app-main {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Admin dashboard is full-viewport; footer is omitted on that route */
+.app-admin-console .app-main {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  flex: 1;
+}
+
+.app-admin-console .admin-dashboard-layout {
+  flex: 1;
+  min-height: 0;
+}

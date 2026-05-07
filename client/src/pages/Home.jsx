@@ -3,19 +3,23 @@ import { Link, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, MapPin, Star, ArrowRight, Calendar, Users } from "lucide-react";
 import api from "../utils/api";
+import RoomImg from "../components/RoomImg";
 import "./Home.css";
 
 const Home = () => {
   const [rooms, setRooms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchDest, setSearchDest] = useState("");
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
+  const [guests, setGuests] = useState(2);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchFeatured = async () => {
       try {
         const { data } = await api.get("/rooms");
-        setRooms(data.slice(0, 4));
+        setRooms(data.slice(0, 6));
       } catch (err) {
         console.error("Failed to fetch rooms:", err);
       } finally {
@@ -26,11 +30,18 @@ const Home = () => {
   }, []);
 
   const fallbackHotels = [
-    { title: "The Grand Resort", location: "San Diego, CA", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=600&q=80" },
-    { title: "The Grand Resort", location: "Maldives", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=600&q=80" },
-    { title: "The Grand Resort", location: "Paris, France", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=600&q=80" },
-    { title: "The Grand Resort", location: "Dubai, UAE", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80" }
-  ];
+    { title: "The Grand Resort", location: "San Diego, CA", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&q=80&auto=format&fit=crop" },
+    { title: "The Grand Resort", location: "Maldives", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&q=80&auto=format&fit=crop" },
+    { title: "The Grand Resort", location: "Paris, France", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&q=80&auto=format&fit=crop" },
+    { title: "The Grand Resort", location: "Dubai, UAE", price: 450, rating: 4.9, image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&q=80&auto=format&fit=crop" }
+  ].map((h, i) => ({
+    _id: `preview-${i}`,
+    title: h.title,
+    location: h.location,
+    price: h.price,
+    rating: h.rating,
+    images: [h.image],
+  }));
 
   const displayHotels = rooms.length > 0
     ? rooms.map(r => ({
@@ -39,7 +50,7 @@ const Home = () => {
         location: `${r.location?.city || "City"}, ${r.location?.country || "Country"}`,
         price: r.price,
         rating: r.rating || 4.9,
-        image: (r.images && r.images.length > 0 && r.images[0].trim() !== "") ? r.images[0] : fallbackHotels[0].image
+        images: Array.isArray(r.images) ? r.images : [],
       }))
     : fallbackHotels;
 
@@ -66,9 +77,9 @@ const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="eyebrow white">The Ultimate Hotel Experience</span>
-            <h1>Discover Your Perfect<br/>Getaway Destination</h1>
-            <p className="hero-sub">Unparalleled luxury and comfort await at the world's most exclusive<br/>hotels and resorts. Start your journey today.</p>
+            <span className="eyebrow white">Curated luxury & comfort</span>
+            <h1>Find the stay that fits<br/>your next journey</h1>
+            <p className="hero-sub">Thoughtfully selected hotels, residences, and resorts with transparent pricing, flexible search, and secure checkout—whether you travel for business or leisure.</p>
 
             <div className="search-bar-exact">
                <div className="search-input">
@@ -77,17 +88,26 @@ const Home = () => {
                </div>
                <div className="search-input">
                   <label><Calendar size={14}/> Check in</label>
-                  <input type="date" />
+                  <input type="date" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
                </div>
                <div className="search-input">
                   <label><Calendar size={14}/> Check out</label>
-                  <input type="date" />
+                  <input type="date" value={checkOut} min={checkIn || undefined} onChange={(e) => setCheckOut(e.target.value)} />
                </div>
                <div className="search-input sm">
                   <label><Users size={14}/> Guests</label>
-                  <input type="number" placeholder="2" min="1" />
+                  <input type="number" placeholder="2" min="1" max="16" value={guests} onChange={(e) => setGuests(Number(e.target.value) || 1)} />
                </div>
-               <button className="search-btn-exact" onClick={() => navigate(`/search?location=${searchDest}`)}>
+               <button type="button" className="search-btn-exact" onClick={() => {
+                  const params = new URLSearchParams();
+                  const dest = searchDest.trim();
+                  if (dest) params.set("location", dest);
+                  if (checkIn) params.set("checkIn", checkIn);
+                  if (checkOut) params.set("checkOut", checkOut);
+                  params.set("guests", String(Math.min(16, Math.max(1, guests))));
+                  const qs = params.toString();
+                  navigate(qs ? `/search?${qs}` : "/search");
+               }}>
                   <Search size={18} />
                   <span>Search</span>
                </button>
@@ -100,8 +120,8 @@ const Home = () => {
       <section className="featured-exact">
          <div className="container">
             <header className="section-head-exact centered">
-               <h2>Featured Hotels</h2>
-               <p>Discover our handpicked selection of exceptional properties around the world, offering unparalleled luxury and unforgettable experiences</p>
+               <h2>Featured stays</h2>
+               <p>Hand-picked properties with verified amenities, flexible cancellation on select rates, and dedicated guest support before you arrive.</p>
             </header>
 
             <div className="hotel-grid-exact">
@@ -116,7 +136,7 @@ const Home = () => {
                  >
                     <Link to={h._id ? `/room/${h._id}` : "/rooms"} className="card-link-wrap">
                        <div className="card-top">
-                          <img src={h.image} alt={h.title} loading="lazy" />
+                          <RoomImg room={h} slot={0} alt={h.title} loading="lazy" />
                           <span className="best-seller">Best Seller</span>
                        </div>
                        <div className="card-body">

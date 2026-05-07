@@ -1,18 +1,22 @@
 .auth-page-exact {
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: var(--neutral-50);
-  padding: 2rem;
-  margin-top: -84px;
+  padding: calc(var(--nav-h) + max(2rem, env(safe-area-inset-top)))
+    max(1rem, env(safe-area-inset-right))
+    max(2rem, env(safe-area-inset-bottom))
+    max(1rem, env(safe-area-inset-left));
+  margin-top: calc(var(--nav-h) * -1);
 }
 
 .auth-card-clean {
   width: 100%;
-  max-width: 480px;
+  max-width: min(480px, 100%);
   background: white;
-  padding: 4rem;
+  padding: clamp(2rem, 5vw, 4rem);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-xl);
   border: 1px solid var(--neutral-100);
@@ -24,7 +28,7 @@
 }
 
 .auth-header h1 {
-  font-size: 2rem;
+  font-size: clamp(1.5rem, 4vw + 0.5rem, 2rem);
   margin-bottom: 0.75rem;
   color: var(--neutral-900);
 }
@@ -123,15 +127,43 @@
 
 .admin-demo {
   margin-top: 2rem;
-  padding: 1rem;
+  padding: 1rem 1.15rem;
   background: var(--neutral-50);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--neutral-200);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: var(--neutral-600);
+  text-align: left;
+}
+
+.admin-demo p {
+  margin: 0;
+}
+
+.admin-demo code {
+  font-size: 0.78em;
+  padding: 0.1rem 0.35rem;
+  background: white;
+  border-radius: 4px;
+  border: 1px solid var(--neutral-200);
+}
+
+.admin-demo a {
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.form-input-box .field-hint {
   font-size: 0.75rem;
   color: var(--neutral-400);
+  margin: -0.25rem 0 0.35rem;
+  font-weight: 500;
 }
 
 @media (max-width: 480px) {
-  .auth-card-clean {
-    padding: 2.5rem 2rem;
+  .auth-submit-btn-clean {
+    min-height: 48px;
+    font-size: 1rem;
   }
 }

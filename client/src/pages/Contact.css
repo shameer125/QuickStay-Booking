@@ -112,6 +112,28 @@
   margin-top: 2rem;
 }
 
+.contact-submit-btn:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.contact-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.contact-inline-error {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.85rem 1rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
 /* Success View */
 .success-msg-v2 {
   padding: 4rem 0;

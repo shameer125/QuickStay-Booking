@@ -4,23 +4,23 @@ import { AuthContext } from "../context/AuthContext";
 
 const AdminRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
-  console.log("AdminRoute check - user:", user);
-  console.log(
-    "AdminRoute check - user token:",
-    localStorage.getItem("userInfo"),
-  );
+  const stored = localStorage.getItem("userInfo");
+  let parsed = null;
+  try {
+    parsed = stored ? JSON.parse(stored) : null;
+  } catch {
+    parsed = null;
+  }
+  const effectiveUser = user || parsed;
 
-  if (!user) {
-    console.log("No user found, redirecting to login");
-    return <Navigate to="/login" replace />;
+  if (!effectiveUser) {
+    return <Navigate to="/login" replace state={{ fromAdmin: true }} />;
   }
 
-  if (!user.isAdmin) {
-    console.log("User is not admin, redirecting to home");
-    return <Navigate to="/" replace />;
+  if (!effectiveUser.isAdmin) {
+    return <Navigate to="/my-bookings" replace />;
   }
 
-  console.log("User is admin, allowing access");
   return children;
 };
 

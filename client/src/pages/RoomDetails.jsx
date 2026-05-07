@@ -1,31 +1,31 @@
-import React, { useState, useEffect, useContext } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-  MapPin, Star, Wifi, Coffee, Waves, Shield, CheckCircle,
-  Calendar, Users, ArrowLeft, Heart, Share2
-} from "lucide-react";
-import { AuthContext } from "../context/AuthContext";
-import api from "../utils/api";
-import "./RoomDetails.css";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const galleryFallbacks = [
-  "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1000&q=80",
-  "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=600&q=80",
-  "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=600&q=80"
-];
+import {
+  MapPin, Star, Shield, CheckCircle,
+  ArrowLeft, Heart, Share2
+} from "lucide-react";
+
+
+import api from "../utils/api";
+import { readFavoriteIds, toggleFavoriteId } from "../utils/favorites";
+import RoomImg from "../components/RoomImg";
+import "./RoomDetails.css";
 
 const RoomDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { user } = useContext(AuthContext);
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState(2);
+  const [saved, setSaved] = useState(false);
+  const [shareHint, setShareHint] = useState("");
+
+  useEffect(() => {
+    if (id) setSaved(readFavoriteIds().includes(String(id)));
+  }, [id]);
 
   useEffect(() => {
     const fetchRoom = async () => {
@@ -41,11 +41,6 @@ const RoomDetails = () => {
     fetchRoom();
   }, [id]);
 
-  const getImg = (idx) => {
-    const img = room?.images?.[idx];
-    if (img && typeof img === "string" && img.trim() !== "") return img;
-    return galleryFallbacks[idx] || galleryFallbacks[0];
-  };
   if (loading) return <div className="loading">Loading property details...</div>;
   if (!room) return <div className="loading">Property not found.</div>;
 
@@ -56,21 +51,58 @@ const RoomDetails = () => {
         <div className="detail-top-nav">
            <button className="back-btn-ghost" onClick={() => navigate(-1)}><ArrowLeft size={18}/> Back</button>
            <div className="top-actions">
-              <button><Share2 size={18}/> Share</button>
-              <button><Heart size={18}/> Save</button>
+              <button type="button" onClick={async () => {
+                const url = typeof window !== "undefined" ? window.location.href : "";
+                try {
+                  if (navigator.share) {
+                    await navigator.share({ title: room?.title, text: "View this stay", url });
+                  } else {
+                    await navigator.clipboard.writeText(url);
+                    setShareHint("Link copied to clipboard");
+                    setTimeout(() => setShareHint(""), 2200);
+                  }
+                } catch {
+                  try {
+                    await navigator.clipboard.writeText(url);
+                    setShareHint("Link copied to clipboard");
+                    setTimeout(() => setShareHint(""), 2200);
+                  } catch {
+                    setShareHint("Copy the URL from your browser address bar.");
+                    setTimeout(() => setShareHint(""), 2800);
+                  }
+                }
+              }}><Share2 size={18}/> Share</button>
+              <button type="button" className={saved ? "save-active" : ""} onClick={() => {
+                if (!id) return;
+                setSaved(toggleFavoriteId(id));
+              }}><Heart size={18} fill={saved ? "currentColor" : "none"} strokeWidth={2} /> {saved ? "Saved" : "Save"}</button>
+              <Link to="/saved" className="saved-inline-link">Saved list</Link>
            </div>
+           {shareHint ? <p className="share-hint" role="status">{shareHint}</p> : null}
         </div>
 
         {/* Title */}
         <header className="room-header-exact">
            <div className="title-row-exact">
-              <h1>{room.title} <span className="cat-tag">({room.type || "Simple Bed"})</span></h1>
+              <h1>{room.title} <span className="cat-tag">({room.type || "Suite"})</span></h1>
               {room.offer > 0 && <span className="offer-tag-exact">{room.offer}% OFF</span>}
            </div>
            <div className="stats-row-exact">
               <div className="rating-wrap">
-                 {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#f59e0b" color="#f59e0b" />)}
-                 <span className="count">200+ reviews</span>
+                 {[1, 2, 3, 4, 5].map((n) => (
+                   <Star
+                     key={n}
+                     size={14}
+                     fill={
+                       n <= Math.round(room.rating || 4.8)
+                         ? "#f59e0b"
+                         : "none"
+                     }
+                     color="#f59e0b"
+                     aria-hidden
+                   />
+                 ))}
+                 <span className="count">{room.numReviews ?? 180}+ reviews</span>
               </div>
               <span className="sep-dot"></span>
               <p className="loc-text-exact"><MapPin size={14}/> {room.location?.city || "Los Angeles"}, {room.location?.country || "USA"}</p>
@@ -80,13 +112,13 @@ const RoomDetails = () => {
         {/* Gallery 1+4 */}
         <div className="gallery-grid-exact">
            <div className="gallery-main">
-              <img src={getImg(0)} alt={room.title} loading="lazy" />
+              <RoomImg room={room} slot={0} alt={room.title} loading="lazy" />
            </div>
            <div className="gallery-side">
-              <img src={getImg(1)} alt="" loading="lazy" />
-              <img src={getImg(2)} alt="" loading="lazy" />
-              <img src={getImg(3)} alt="" loading="lazy" />
-              <img src={getImg(4)} alt="" loading="lazy" />
+              <RoomImg room={room} slot={1} alt="" loading="lazy" />
+              <RoomImg room={room} slot={2} alt="" loading="lazy" />
+              <RoomImg room={room} slot={3} alt="" loading="lazy" />
+              <RoomImg room={room} slot={4} alt="" loading="lazy" />
            </div>
         </div>
 
@@ -96,9 +128,14 @@ const RoomDetails = () => {
               <h2>Experience Luxury Like Never Before</h2>
 
               <div className="amenity-icons-row">
-                 <span><Wifi size={18}/> Free wifi</span>
-                 <span><Coffee size={18}/> Free breakfast</span>
-                 <span><Waves size={18}/> Pool access</span>
+                 {(room.amenities?.length
+                   ? room.amenities
+                   : ["WiFi", "Breakfast", "Pool access", "Concierge"]
+                 ).slice(0, 6).map((label) => (
+                   <span key={label}>
+                     <CheckCircle size={18} aria-hidden /> {label}
+                   </span>
+                 ))}
               </div>
 
               <div className="badges-stack">
@@ -151,7 +188,7 @@ const RoomDetails = () => {
 
               {/* Host */}
               <div className="host-section-exact">
-                 <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80" alt="Host" loading="lazy" />
+                 <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&q=80&auto=format&fit=crop" alt="Host" loading="lazy" onError={(e) => { e.currentTarget.src = "https://picsum.photos/seed/host-quickstay/160/160"; e.currentTarget.onerror = null; }} />
                  <div className="host-info">
                     <h4>Hosted by Emma Rodriguez</h4>
                     <div className="host-stats">

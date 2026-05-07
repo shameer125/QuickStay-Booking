@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { User, Mail, Lock, ArrowRight } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
+import { getApiErrorMessage } from '../utils/api';
 import "./Auth.css";
 
 const Register = () => {
@@ -20,9 +21,16 @@ const Register = () => {
     setLoading(true);
     try {
       await register(name, email, password);
-      navigate('/dashboard');
+      const stored = localStorage.getItem("userInfo");
+      const u = stored ? JSON.parse(stored) : null;
+      navigate(u?.isAdmin ? "/dashboard" : "/", { replace: true });
     } catch (err) {
-      setError(err.response?.data?.message || 'Membership initiation failed.');
+      setError(
+        getApiErrorMessage(
+          err,
+          "We could not create your account. Please check the form and try again.",
+        ),
+      );
     } finally {
       setLoading(false);
     }
@@ -72,12 +80,14 @@ const Register = () => {
 
             <div className="form-input-box">
               <label>Password</label>
+              <p className="field-hint">Use at least 6 characters.</p>
               <div className="input-with-icon">
                  <Lock size={18} />
                  <input
                    type="password"
                    placeholder="••••••••"
                    value={password}
+                   minLength={6}
                    onChange={(e) => setPassword(e.target.value)}
                    required
                  />

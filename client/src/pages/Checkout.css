@@ -278,3 +278,34 @@
   .trip-summary-clean { flex-direction: column; gap: 1.5rem; }
   .form-row.split { flex-direction: column; gap: 0; }
 }
+
+@media (max-width: 480px) {
+  .checkout-page-clean {
+    padding: clamp(6rem, 14vw + 2rem, 10rem) 0 3rem;
+  }
+
+  .checkout-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .checkout-header h1 {
+    font-size: 1.55rem;
+  }
+
+  .checkout-block {
+    padding: 1.5rem;
+  }
+
+  .success-footer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+  }
+
+  .btn-primary-blue {
+    width: 100%;
+    text-align: center;
+  }
+}

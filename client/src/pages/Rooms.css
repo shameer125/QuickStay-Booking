@@ -174,6 +174,16 @@
   color: var(--neutral-900);
 }
 
+.rooms-results-meta {
+  padding: 1.5rem 0 3rem;
+  font-size: 0.92rem;
+  color: var(--neutral-500);
+}
+
+.rooms-results-meta strong {
+  color: var(--neutral-800);
+}
+
 .show-more-row {
   padding: 3rem 0;
   text-align: center;
@@ -296,6 +306,32 @@
   .card-image-h { height: 250px; }
   .rooms-exact-page { padding: 7rem 0 3rem; }
   .rooms-head-exact { margin-bottom: 2.5rem; }
+}
+
+@media (max-width: 480px) {
+  .rooms-exact-page {
+    padding: 6rem 0 2.5rem;
+  }
+
+  .title-row-h {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .card-footer-h {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
+    text-align: center;
+  }
+
+  .view-details-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 /* Mobile Filter Drawer */

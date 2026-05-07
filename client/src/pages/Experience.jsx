@@ -64,7 +64,7 @@ const Experience = () => {
                     <div className="exp-body">
                        <h3>{exp.title}</h3>
                        <p>{exp.description}</p>
-                       <button className="explore-link">Explore Chapter <ArrowRight size={16}/></button>
+                       <Link to="/rooms" className="explore-link">View matching stays <ArrowRight size={16}/></Link>
                     </div>
                  </motion.div>
                ))}

@@ -37,14 +37,23 @@ const allowedOrigins = [
   process.env.FRONTEND_URL, // Production Frontend
 ].filter(Boolean);
 
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+      if (!origin) {
+        return callback(null, true);
       }
+      // Dev: allow any browser origin so registration works from LAN IP, machine
+      // hostname, IPv6 ::1, custom Vite ports, etc. (credentials still scoped per-origin).
+      if (!isProduction) {
+        return callback(null, true);
+      }
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+      return callback(new Error("Not allowed by CORS"));
     },
     credentials: true,
   })
@@ -55,6 +64,7 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/rooms", require("./routes/roomRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api/admin", require("./routes/adminRoutes"));
+app.use("/api/contact", require("./routes/contactRoutes"));
 
 // Basic Route
 app.get("/", (req, res) => {
