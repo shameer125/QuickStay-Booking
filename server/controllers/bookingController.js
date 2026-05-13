@@ -25,6 +25,7 @@ const addBookingItems = async (req, res) => {
 // @desc    Get logged in user bookings
 // @route   GET /api/bookings/mybookings
 // @access  Private
+
 const getMyBookings = async (req, res) => {
   const bookings = await Booking.find({ user: req.user._id }).populate(
     "room",
@@ -36,6 +37,7 @@ const getMyBookings = async (req, res) => {
 // @desc    Get all bookings
 // @route   GET /api/bookings
 // @access  Private/Admin
+
 const getBookings = async (req, res) => {
   const bookings = await Booking.find({})
     .populate("user", "id name")
@@ -46,6 +48,7 @@ const getBookings = async (req, res) => {
 // @desc    Update booking status
 // @route   PUT /api/bookings/:id
 // @access  Private/Admin
+
 const updateBookingStatus = async (req, res) => {
   const booking = await Booking.findById(req.params.id);
 
@@ -61,6 +64,7 @@ const updateBookingStatus = async (req, res) => {
 // @desc    Cancel a booking
 // @route   DELETE /api/bookings/:id/cancel
 // @access  Private
+
 const cancelBooking = async (req, res) => {
   const booking = await Booking.findById(req.params.id);
 
