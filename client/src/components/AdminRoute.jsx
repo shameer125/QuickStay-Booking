@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
 
 const AdminRoute = ({ children }) => {
+  
   const { user } = useContext(AuthContext);
   const stored = localStorage.getItem("userInfo");
   let parsed = null;
