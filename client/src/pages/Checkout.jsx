@@ -108,6 +108,7 @@ const Checkout = () => {
         </div>
       </div>
     );
+     
   }
 
   return (
@@ -116,7 +117,8 @@ const Checkout = () => {
         <header className="checkout-header">
            <button className="back-btn" onClick={() => navigate(-1)}><ArrowLeft size={18}/> Back</button>
            <h1>Checkout</h1>
-        </header>
+           </header>
+           
 
         <div className="checkout-grid">
            <div className="checkout-form-side">
@@ -139,7 +141,8 @@ const Checkout = () => {
                        <p>{room?.location?.city}, {room?.location?.country}</p>
                     </div>
                  </div>
-              </section>
+                 </section>
+                 
 
               <section className="checkout-block">
                  <div className="block-title">
