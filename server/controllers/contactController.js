@@ -13,9 +13,11 @@ const submitContact = async (req, res) => {
   if (!clean.name || clean.name.length < 2) {
     return res.status(400).json({ message: "Please enter your name." });
   }
+
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean.email)) {
     return res.status(400).json({ message: "Please enter a valid email address." });
   }
+
   if (!clean.message || clean.message.length < 10) {
     return res
       .status(400)
@@ -27,6 +29,7 @@ const submitContact = async (req, res) => {
       "Thank you. A member of our concierge team will respond within one business day.",
     reference: `QS-${Date.now().toString(36).toUpperCase()}`,
   });
+  
 };
 
 module.exports = { submitContact };
