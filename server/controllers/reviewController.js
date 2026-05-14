@@ -4,6 +4,7 @@ const Room = require('../models/Room');
 // @desc    Create new review
 // @route   POST /api/rooms/:id/reviews
 // @access  Private
+
 const createRoomReview = async (req, res) => {
     const { rating, comment } = req.body;
 
@@ -32,6 +33,7 @@ const createRoomReview = async (req, res) => {
         });
 
         // Update room rating
+
         const reviews = await Review.find({ room: req.params.id });
         room.numReviews = reviews.length;
         room.rating = reviews.reduce((acc, item) => item.rating + acc, 0) / reviews.length;
@@ -46,6 +48,7 @@ const createRoomReview = async (req, res) => {
 // @desc    Get reviews for a room
 // @route   GET /api/rooms/:id/reviews
 // @access  Public
+
 const getRoomReviews = async (req, res) => {
     try {
         const reviews = await Review.find({ room: req.params.id }).populate('user', 'name');
