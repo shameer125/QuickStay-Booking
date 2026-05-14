@@ -3,6 +3,7 @@ const Room = require("../models/Room");
 // @desc    Get all rooms
 // @route   GET /api/rooms
 // @access  Public
+
 const getRooms = async (req, res) => {
   try {
     const { location, category, minPrice, maxPrice } = req.query;
@@ -11,6 +12,7 @@ const getRooms = async (req, res) => {
     if (location) {
       query["location.city"] = { $regex: location, $options: "i" };
     }
+
     if (category) {
       query.category = category;
     }
@@ -30,6 +32,7 @@ const getRooms = async (req, res) => {
 // @desc    Get room by ID
 // @route   GET /api/rooms/:id
 // @access  Public
+
 const getRoomById = async (req, res) => {
   const room = await Room.findById(req.params.id);
   if (room) {
@@ -42,6 +45,7 @@ const getRoomById = async (req, res) => {
 // @desc    Create room
 // @route   POST /api/rooms
 // @access  Private/Admin
+
 const createRoom = async (req, res) => {
   const {
     title,
